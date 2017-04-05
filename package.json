@@ -1,0 +1,20 @@
+{
+  "name": "front-arch",
+  "version": "1.0.0",
+  "description": "front end tools integration",
+  "main": "arch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp dev",
+    "dist": "gulp dist"
+  },
+  "author": "kxw",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.18.8",
+    "gulp": "^3.9.1",
+    "gulp-debug": "^3.1.0",
+    "gulp-inject": "^4.2.0",
+    "gulp-less": "^3.3.0"
+  }
+}
