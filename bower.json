@@ -1,0 +1,13 @@
+{
+  "name": "front-arch",
+  "description": "front end tools integration",
+  "main": "arch.js",
+  "authors": [
+    "kxw"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/kswapd/ui-arch",
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}

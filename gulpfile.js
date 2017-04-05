@@ -8,10 +8,10 @@ var inject = require('gulp-inject');
 
 var lessFile = ['./src/**/*.less'];
 
+var jsFile = ['./src/**/*.js'];
 
 
-
-
+var cssFile = ['./src/**/*.css'];
 
 
 
@@ -34,24 +34,48 @@ var injectOptions = {
 gulp.task('cssInject', function () {
   var target = gulp.src('./src/index.html');
   // It's not necessary to read the files (will speed up things), we're only after their paths: 
-  var sources = gulp.src(lessFile, {read: false});
+  var sources = gulp.src(cssFile, {read: false});
 
  // var sources = gulp.src(['./src/**/*.js', './src/**/*.css'], {read: false});
  
   return target.pipe(inject(sources, injectOptions))
-    .pipe(gulp.dest('./src'))
-    .pipe(reload({stream: true}));
+    .pipe(reload({stream: true}))
+    .pipe(gulp.dest("./src/"));
 });
 
 
 
+
+gulp.task('jsInject', function () {
+  var target = gulp.src('./src/index.html');
+  // It's not necessary to read the files (will speed up things), we're only after their paths: 
+  var sources = gulp.src(jsFile, {read: false});
+
+
+ 
+  return target.pipe(inject(sources, injectOptions))
+    .pipe(reload({stream: true}))
+    .pipe(gulp.dest("./src/"));
+});
+
+/*
+
+gulp.task('cssJsInject', function () {
+  var target = gulp.src('./src/index.html');
+
+ 
+  return target.pipe(inject(sources, injectOptions))
+    .pipe(reload({stream: true}))
+    .pipe(gulp.dest('./src/'));
+});
+*/
 
 
 gulp.task('lessEncode', function(){
 	console.log('encoding less files');
 	gulp.src(lessFile)
 	    .pipe(less())
-            .pipe(gulp.dest('src/styles'));
+      .pipe(gulp.dest('src/styles'));
 });
 
 
@@ -63,9 +87,13 @@ gulp.task('dev',['fileWatch'], function() {
             index: "src/index.html"
         }
     });
+    gulp.start( 'lessEncode', 'cssInject', 'jsInject');
+    
 });
 
 gulp.task('fileWatch', function(){
    gulp.watch(lessFile, ['lessEncode', 'cssInject']); 
+   gulp.watch(jsFile, ['jsInject']); 
+   //gulp.watch(['./src/**/*.less', './src/**/*.js'], ['lessEncode', 'cssJsInject']); 
 });
 
