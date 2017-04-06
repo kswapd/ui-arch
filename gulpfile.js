@@ -13,7 +13,7 @@ var jsFile = ['./src/**/*.js'];
 
 var cssFile = ['./src/**/*.css'];
 
-
+var wiredep = require('wiredep').stream;
 
 var injectOptions = {
         /*transform: function (filePath, file, i, length) {
@@ -28,6 +28,9 @@ var injectOptions = {
     };
 
 
+var wiredepOptions = {
+    directory: 'bower_components'
+};
 
 
 
@@ -39,6 +42,7 @@ gulp.task('cssInject', function () {
  // var sources = gulp.src(['./src/**/*.js', './src/**/*.css'], {read: false});
  
   return target.pipe(inject(sources, injectOptions))
+    .pipe(wiredep(wiredepOptions))
     .pipe(reload({stream: true}))
     .pipe(gulp.dest("./src/"));
 });
@@ -54,6 +58,7 @@ gulp.task('jsInject', function () {
 
  
   return target.pipe(inject(sources, injectOptions))
+    .pipe(wiredep(wiredepOptions))
     .pipe(reload({stream: true}))
     .pipe(gulp.dest("./src/"));
 });
