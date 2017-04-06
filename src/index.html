@@ -1,5 +1,11 @@
-<html>
+<html  ng-app="sparrow">
 <head>
+<meta charset="utf-8" />
+<meta name="description" content="IOT,M2M,MQTT,HNA" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>sparrow</title>
+
+
 <!-- bower:css -->
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
 <!-- endbower -->
@@ -8,8 +14,9 @@
 <!-- endinject -->
 
 </head>
-<body>
+<body ng-controller="MainController">
 
+    <div class="app" id="app" ng-class="{'app-header-fixed':main.app.settings.headerFixed, 'app-aside-fixed':main.app.settings.asideFixed, 'app-aside-folded':main.app.settings.asideFolded, 'app-aside-dock':main.app.settings.asideDock, 'container':main.app.settings.container}" ui-view></div>
 
 
 
@@ -17,10 +24,14 @@
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../bower_components/angular-route/angular-route.js"></script>
 <!-- endbower -->
 
 <!-- inject:js -->
+<script src="/src/js/app.js"></script>
 <script src="/src/js/index.js"></script>
+<script src="/src/app/main/main.controller.js"></script>
 <!-- endinject -->
 
 
@@ -38,10 +49,9 @@
 
 
 
-<div ng-app="">
  	<p>Angular test : <input type="text" ng-model="name"></p>
  	<h1>Hello {{name}}</h1>
-</div>
+
 
 
 
