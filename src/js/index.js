@@ -1,6 +1,6 @@
 function hi(){
 
-    console.log('hi, js code');
+    console.log('hi, js code3');
 }
 
 $(document).ready(function(){
