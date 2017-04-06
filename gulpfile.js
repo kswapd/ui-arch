@@ -29,7 +29,8 @@ var injectOptions = {
 
 
 var wiredepOptions = {
-    directory: 'bower_components'
+    directory: 'bower_components',
+    devDependencies: true
 };
 
 
@@ -43,6 +44,7 @@ gulp.task('cssInject', function () {
  
   return target.pipe(inject(sources, injectOptions))
     .pipe(wiredep(wiredepOptions))
+
     .pipe(reload({stream: true}))
     .pipe(gulp.dest("./src/"));
 });
@@ -57,7 +59,8 @@ gulp.task('jsInject', function () {
 
 
  
-  return target.pipe(inject(sources, injectOptions))
+  return target.pipe(wiredep(wiredepOptions))
+    .pipe(inject(sources, injectOptions))
     .pipe(wiredep(wiredepOptions))
     .pipe(reload({stream: true}))
     .pipe(gulp.dest("./src/"));
@@ -79,6 +82,7 @@ gulp.task('cssJsInject', function () {
 gulp.task('lessEncode', function(){
 	console.log('encoding less files');
 	gulp.src(lessFile)
+      .pipe(wiredep(wiredepOptions))
 	    .pipe(less())
       .pipe(gulp.dest('src/styles'));
 });
