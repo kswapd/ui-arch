@@ -5,13 +5,13 @@
 (function () {
     'use strict';
 
-    angular.module('sparrow').controller('MainController', MainController);
+    angular.module('eagle').controller('MainController', MainController);
 
     /** @ngInject */
     function MainController($rootScope, $scope, $timeout) {
        /* jshint validthis: true */
 
-       $scope.name = 'sparrow';
+       $scope.name = 'eagle';
   
        var theme_11 = {
           themeID: 11,
@@ -26,7 +26,7 @@
       };
 
       $scope.app = {
-        name: 'sparrow',
+        name: 'eagle',
         version: '',
         // for chart colors
         color: {

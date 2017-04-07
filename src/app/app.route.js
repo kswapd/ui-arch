@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('sparrow')
+        .module('eagle')
         .config(routeConfig)
         .run(function($rootScope,$state) {
 

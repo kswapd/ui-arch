@@ -3,7 +3,7 @@
 
     // Declare app level module which depends on views, and components
     angular
-        .module('sparrow', [
+        .module('eagle', [
         /* Angular Modules */
         'ngAnimate',
         //'ngMessages',

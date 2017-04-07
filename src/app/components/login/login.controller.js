@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('sparrow')
+        .module('eagle')
         .controller('LoginController', LoginController)
         .filter('handleState',function() {
         return function(input) {
