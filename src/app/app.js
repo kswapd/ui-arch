@@ -9,6 +9,7 @@
         //'ngMessages',
         //'ngAria',
         'ngRoute',
+        'ui.router',
         /* 3rd-Party Modules 
         'ui.bootstrap',
         'ui.router',

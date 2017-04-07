@@ -92,8 +92,8 @@ gulp.task('lessEncode', function(){
 gulp.task('dev',['fileWatch'], function() {
     browserSync.init({
         server: {
-            baseDir: "./",
-            index: "src/index.html"
+            baseDir: ["./", "./src/", "./src/assets/"],
+            index: "index.html"
         }
     });
     gulp.start( 'lessEncode', 'cssInject', 'jsInject');
