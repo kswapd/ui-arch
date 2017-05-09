@@ -11,7 +11,9 @@ var lessFile = ['./src/**/*.less'];
 var jsFile = ['./src/**/*.js'];
 
 
-var cssFile = ['./src/**/*.css'];
+var cssFile = ['./dist/*.css'];
+var cssjsFile = ['./src/**/*.js','./dist/*.css'];
+
 
 var wiredep = require('wiredep').stream;
 
@@ -44,9 +46,8 @@ gulp.task('cssInject', function () {
  
   return target.pipe(inject(sources, injectOptions))
     .pipe(wiredep(wiredepOptions))
-
-    .pipe(reload({stream: true}))
-    .pipe(gulp.dest("./src/"));
+    .pipe(gulp.dest("./dist/"))
+      .pipe(reload({stream: true}));
 });
 
 
@@ -59,13 +60,25 @@ gulp.task('jsInject', function () {
 
 
  
-  return target.pipe(wiredep(wiredepOptions))
-    .pipe(inject(sources, injectOptions))
-    .pipe(wiredep(wiredepOptions))
-    .pipe(reload({stream: true}))
-    .pipe(gulp.dest("./src/"));
+  return target.pipe(inject(sources, injectOptions))
+        .pipe(wiredep(wiredepOptions))
+        .pipe(gulp.dest('./dist/'))
+        .pipe(reload({stream: true}));
 });
 
+
+gulp.task('cssjsInject',['lessEncode'], function () {
+    var target = gulp.src('./src/index.html');
+    // It's not necessary to read the files (will speed up things), we're only after their paths:
+    var sources = gulp.src(cssjsFile, {read: false});
+
+
+
+    return target.pipe(inject(sources, injectOptions))
+        .pipe(wiredep(wiredepOptions))
+        .pipe(gulp.dest('./dist/'))
+        .pipe(reload({stream: true}));
+});
 /*
 
 gulp.task('cssJsInject', function () {
@@ -84,7 +97,7 @@ gulp.task('lessEncode', function(){
 	gulp.src(lessFile)
       .pipe(wiredep(wiredepOptions))
 	    .pipe(less())
-      .pipe(gulp.dest('src/styles'));
+      .pipe(gulp.dest('./dist/'));
 });
 
 
@@ -92,17 +105,18 @@ gulp.task('lessEncode', function(){
 gulp.task('dev',['fileWatch'], function() {
     browserSync.init({
         server: {
-            baseDir: ["./", "./src/", "./src/assets/"],
+            baseDir: ["./dist/", "./", "./src/assets/"],
             index: "index.html"
         }
     });
-    gulp.start( 'lessEncode', 'cssInject', 'jsInject');
+    gulp.start('cssjsInject');
     
 });
 
 gulp.task('fileWatch', function(){
-   gulp.watch(lessFile, ['lessEncode', 'cssInject']); 
-   gulp.watch(jsFile, ['jsInject']); 
-   //gulp.watch(['./src/**/*.less', './src/**/*.js'], ['lessEncode', 'cssJsInject']); 
+   //gulp.watch(lessFile, ['jsInject','lessEncode', 'cssInject']);
+   //gulp.watch(jsFile, ['jsInject','lessEncode', 'cssInject']);
+   gulp.watch(['./src/**/*.less', './src/**/*.js','./dist/*.css'], ['cssjsInject']);
+
 });
 
